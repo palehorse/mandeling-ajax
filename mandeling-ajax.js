@@ -25,13 +25,12 @@ var MandelingAJAX = (function(factory) {
 	    	_promise = (function() {
 	    		return new Promise(function(resolve, reject) {
 	    			var ObjReturn = {};
-	    			_objXMLhttpRequest.open(_http_method, _url, _asynchronous);
-	    			
+	    			_objMethod[_http_method].apply();
+
 	    			for (var name in _headers) {
 	    				_objXMLhttpRequest.setRequestHeader(name, _headers[name]);
 	    			}
 
-	    			_objMethod[_http_method].apply();
 	    			_objXMLhttpRequest.send(_build_data(_data));
 	    			_objXMLhttpRequest.onreadystatechange = function() {
 	    				if (this.readyState == 4) {
@@ -81,11 +80,13 @@ var MandelingAJAX = (function(factory) {
 	    };
 
 	    _objMethod.get = function() {
-	    	_url = _url + _build_data(_data);
+	    	_url = _url + '?' + _build_data(_data);
 	    	_data = {};
+	    	_objXMLhttpRequest.open(_http_method, _url, _asynchronous);
 	    };
 
 	    _objMethod.post = function() {
+	    	_objXMLhttpRequest.open(_http_method, _url, _asynchronous);
 	    	_objXMLhttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    };
 
