@@ -6,33 +6,28 @@ var MandelingAJAX = (function(factory) {
 	}
 })(function() {
 	var _asynchronous = true,
-		_data = {},_promise,_url,_http_method,_success,_fail,
-	    _objXMLhttpRequest = new XMLHttpRequest()
+		_data = {},_promise,_url,_method,_http_method,_success,_fail,
 	    _objMethod = {},
 	    _headers = {},
-	    _build_data = function(data) {
-	    	var params = [];
-	    	for (var key in data) {
-	    		params.push(key + "=" + data[key]);
-	    	}
-
-	    	if (params.length > 0) {
-	    		return params.join("&");
-	    	}
-	    	return "";
+	    _package = null,
+	    _setHeaders = function(name, value) {
+	    	_headers[name] = value;
 	    },
 	    _send = function() {
 	    	_promise = (function() {
 	    		return new Promise(function(resolve, reject) {
-	    			var ObjReturn = {};
-	    			_objMethod[_http_method].apply();
+	    			var objXMLhttpRequest = new XMLHttpRequest(),
+	    				ObjReturn = {};
+	    			_objMethod[_method].apply();
+	    			objXMLhttpRequest.open(_http_method, _url, _asynchronous);
+	    			objXMLhttpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
 	    			for (var name in _headers) {
-	    				_objXMLhttpRequest.setRequestHeader(name, _headers[name]);
+	    				objXMLhttpRequest.setRequestHeader(name, _headers[name]);
 	    			}
 
-	    			_objXMLhttpRequest.send(_build_data(_data));
-	    			_objXMLhttpRequest.onreadystatechange = function() {
+	    			objXMLhttpRequest.send(_package);
+	    			objXMLhttpRequest.onreadystatechange = function() {
 	    				if (this.readyState == 4) {
 	    					ObjReturn.status = this.status;
 	    					ObjReturn.response = this.responseText;
@@ -80,14 +75,33 @@ var MandelingAJAX = (function(factory) {
 	    };
 
 	    _objMethod.get = function() {
-	    	_url = _url + '?' + _build_data(_data);
-	    	_data = {};
-	    	_objXMLhttpRequest.open(_http_method, _url, _asynchronous);
+	    	var params = [];
+	    	for (name in _data) {
+	    		params.push(_data[name]);
+	    	}
+
+	    	if (params.length > 0) {
+	    		_url = _url + '?' + params.join('&');
+	    	}
+	    	_http_method = 'get';
 	    };
 
 	    _objMethod.post = function() {
-	    	_objXMLhttpRequest.open(_http_method, _url, _asynchronous);
-	    	_objXMLhttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    	var params = [];
+	    	for (name in _data) {
+	    		params.push(_data[name]);
+	    	}
+	    	_http_method = 'post';
+	    	_package = params.join('&');
+	    	_setHeaders("Content-type", "application/x-www-form-urlencoded");
+	    };
+
+	    _objMethod.upload = function() {
+	    	_package = new FormData();
+	    	for (name in _data) {
+	    		_package.append(name, _data[name]);
+	    	}
+	    	_http_method = 'post';
 	    };
 
 	return {
@@ -95,8 +109,8 @@ var MandelingAJAX = (function(factory) {
 			_url = url;
 			return this;
 		},
-		setMethod: function(http_method) {
-			_http_method = http_method;
+		setMethod: function(method) {
+			_method = method;
 			return this;
 		},
 		setData: function(data) {
@@ -104,7 +118,7 @@ var MandelingAJAX = (function(factory) {
 			return this;
 		},
 		setHeaders: function(name, value) {
-			_headers[name] = value;
+			_setHeaders(name, value);
 			return this;
 		},
 		send: function() {
@@ -123,9 +137,13 @@ var MandelingAJAX = (function(factory) {
 			return this.setMethod('get')
 					   .send();
 		},
-		post: function(url, data) {
+		post: function(url, data, csrf) {
 			if (typeof url == 'string') {
 				this.setUrl(url);
+			}
+
+			if (typeof csrf == 'string') {
+				this.setHeaders('X-CSRF-TOKEN', csrf);
 			}
 
 			if (typeof data == 'object') {
@@ -133,6 +151,22 @@ var MandelingAJAX = (function(factory) {
 			}
 
 			return this.setMethod('post')
+					   .send();
+		},
+		upload: function(url, data, csrf) {
+			if (typeof url == 'string') {
+				this.setUrl(url);
+			}
+
+			if (typeof csrf == 'string') {
+				this.setHeaders('X-CSRF-TOKEN', csrf);
+			}
+
+			if (typeof data == 'object') {
+				this.setData(data);
+			}
+
+			return this.setMethod('upload')
 					   .send();
 		},
 		success: function(callback) {
