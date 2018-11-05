@@ -89,7 +89,7 @@ var MandelingAJAX = (function(factory) {
 	    _objMethod.post = function() {
 	    	var params = [];
 	    	for (name in _data) {
-	    		params.push(_data[name]);
+	    		params.push(name + '=' + _data[name]);
 	    	}
 	    	_http_method = 'post';
 	    	_package = params.join('&');
