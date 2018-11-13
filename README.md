@@ -12,7 +12,7 @@
     var ajax = require('mandeling-ajax/mandeling-ajax.js');
 
 
-## 基本方法
+## 常用方法
 ### get
     ajax.get('/example/get/something', {fields: 'name,birthday,gender'});
 ### post
