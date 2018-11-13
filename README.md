@@ -20,18 +20,18 @@ ajax.post('/example/update/something', {name: John, birthday: '1990-10-20'});
 ### upload
 ajax.upload('/example/upload/something', file);
 ### success
-ajax.get('/example/get/something', {fields: 'name,birthday,gender'})
-    .success(function(res) {
-        document.write('name' + res.name);
-        document.write('birthday' + res.birthday);
-        document.write('gender' + res.gender);
-        //do something when success. 
-    });
+ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
+    .success(function(res) {  
+        document.write('name' + res.name);  
+        document.write('birthday' + res.birthday);  
+        document.write('gender' + res.gender);  
+        //do something when success.   
+    });  
 ### fail
-ajax.get('/example/get/something', {fields: 'name,birthday,gender'})
-    .success(function(res) {
-        //do something when success. 
-    })
-    .fail(function(res) {
-        console.error('Something wrong!');
-    });
+ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
+    .success(function(res) {  
+        //do something when success.   
+    })  
+    .fail(function(res) {  
+        console.error('Something wrong!');  
+    });  
