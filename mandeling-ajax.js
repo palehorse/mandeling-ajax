@@ -10,6 +10,18 @@ var MandelingAJAX = (function(factory) {
 	    _objMethod = {},
 	    _headers = {},
 	    _package = null,
+	    _init = function() {
+	    	_data        = {};
+	    	_promise     = null;
+	    	_url         = null;
+	    	_method      = null;
+	    	_http_method = null;
+	    	_success     = null;
+	    	_fail        = null;
+	    	_headers     = {};
+	    	_package     = null;
+
+	    },
 	    _setHeaders = function(name, value) {
 	    	_headers[name] = value;
 	    },
@@ -77,7 +89,7 @@ var MandelingAJAX = (function(factory) {
 	    _objMethod.get = function() {
 	    	var params = [];
 	    	for (name in _data) {
-	    		params.push(_data[name]);
+	    		params.push(name + '=' + _data[name]);
 	    	}
 
 	    	if (params.length > 0) {
@@ -105,6 +117,9 @@ var MandelingAJAX = (function(factory) {
 	    };
 
 	return {
+		init: function() {
+			_init.apply();
+		},
 		setUrl: function(url) {
 			_url = url;
 			return this;
@@ -126,6 +141,7 @@ var MandelingAJAX = (function(factory) {
 			return this;
 		},
 		get: function(url, data) {
+			this.init();
 			if (typeof url == 'string') {
 				this.setUrl(url);
 			}
@@ -138,6 +154,7 @@ var MandelingAJAX = (function(factory) {
 					   .send();
 		},
 		post: function(url, data, csrf) {
+			this.init();
 			if (typeof url == 'string') {
 				this.setUrl(url);
 			}
@@ -154,6 +171,7 @@ var MandelingAJAX = (function(factory) {
 					   .send();
 		},
 		upload: function(url, data, csrf) {
+			this.init();
 			if (typeof url == 'string') {
 				this.setUrl(url);
 			}
