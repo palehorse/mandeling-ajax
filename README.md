@@ -7,7 +7,7 @@ npm install mandeling
 ## 引入
 ### JavaScript
 * var ajax = MandelingAJAX();
-* var ajax
+* var ajax = new MandelingAJAX();
 ### Vue
 * require('mandeling-ajax/mandeling-ajax.js');
 
