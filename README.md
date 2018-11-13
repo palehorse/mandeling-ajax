@@ -3,11 +3,7 @@
 
 ## 基本方法
 ### * get
-
 ### * post
-
 ### * upload
-
 ### * success
-
 ### * fail
