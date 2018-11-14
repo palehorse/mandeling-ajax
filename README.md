@@ -2,14 +2,10 @@
 用JavaScript實作非同步「傳送資料給伺服器」與「從伺服器取得資料」雙向網路傳輸模式，即所謂的AJAX．
 
 ## 安裝
-    npm install mandeling
-
-## 引入
+    npm install mandeling or <script src="mandeling-ajax/mandeling-ajax.js"></script>
 ### JavaScript
-    <script src="mandeling-ajax/mandeling-ajax.js"></script>
-    <script>
-        var ajax = MandelingAJAX();
-        var ajax = new MandelingAJAX();
+    var ajax = MandelingAJAX();
+    var ajax = new MandelingAJAX();
 ### Vue
     var ajax = require('mandeling-ajax/mandeling-ajax.js');
 ## 常用方法
