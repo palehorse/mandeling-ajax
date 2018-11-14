@@ -6,20 +6,20 @@
 
 ## 引入
 ### JavaScript
-    var ajax = MandelingAJAX();
-    var ajax = new MandelingAJAX();
+    <script src="mandeling-ajax/mandeling-ajax.js"></script>
+    <script>
+        var ajax = MandelingAJAX();
+        var ajax = new MandelingAJAX();
 ### Vue
     var ajax = require('mandeling-ajax/mandeling-ajax.js');
-
-
 ## 常用方法
-### get
+### get(url, objData)
     ajax.get('/example/get/something', {fields: 'name,birthday,gender'});
-### post
+### post(url, objData)
     ajax.post('/example/update/something', {name: John, birthday: '1990-10-20'});
-### upload
+### upload(url, file)
     ajax.upload('/example/upload/something', file);
-### success
+### success(callback)
     ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
         .success(function(res) {  
             document.write('name' + res.name);  
@@ -27,7 +27,7 @@
             document.write('gender' + res.gender);  
             //do something when success.   
         });  
-### fail
+### fail(callback)
     ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
         .success(function(res) {  
             //do something when success.   
