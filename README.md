@@ -4,30 +4,44 @@
 ## 安裝
     npm install mandeling or <script src="mandeling-ajax/mandeling-ajax.js"></script>
 ### JavaScript
-    var ajax = MandelingAJAX();
-    var ajax = new MandelingAJAX();
+```javascript
+var ajax = MandelingAJAX();
+var ajax = new MandelingAJAX();
+```
 ### Vue
-    var ajax = require('mandeling-ajax/mandeling-ajax.js');
+```javascript
+var ajax = require('mandeling-ajax/mandeling-ajax.js');
+```
 ## 常用方法
 ### get(url, objData)
-    ajax.get('/example/get/something', {fields: 'name,birthday,gender'});
+```javascript
+ajax.get('/example/get/something', {fields: 'name,birthday,gender'});
+```
 ### post(url, objData)
-    ajax.post('/example/update/something', {name: John, birthday: '1990-10-20'});
+```javascript
+ajax.post('/example/update/something', {name: John, birthday: '1990-10-20'});
+```
 ### upload(url, file)
-    ajax.upload('/example/upload/something', file);
+```javascript
+ajax.upload('/example/upload/something', file);
+```
 ### success(callback)
-    ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
-        .success(function(res) {  
-            document.write('name' + res.name);  
-            document.write('birthday' + res.birthday);  
-            document.write('gender' + res.gender);  
-            //do something when success.   
-        });  
+```javascript
+ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
+    .success(function(res) {  
+        document.write('name' + res.name);  
+        document.write('birthday' + res.birthday);  
+        document.write('gender' + res.gender);  
+        //do something when success.   
+    });
+```
 ### fail(callback)
-    ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
-        .success(function(res) {  
-            //do something when success.   
-        })  
-        .fail(function(res) {  
-            console.error('Something wrong!');  
-        });  
+```javascript
+ajax.get('/example/get/something', {fields: 'name,birthday,gender'})  
+    .success(function(res) {  
+        //do something when success.   
+    })  
+    .fail(function(res) {  
+        console.error('Something wrong!');  
+    });  
+```
