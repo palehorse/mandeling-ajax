@@ -75,7 +75,7 @@ var MandelingAJAX = (function(factory) {
 	    		});
 	    	})()
 	    	.then(function(res) {
-	    		if (typeof _success === 'function') {console.log(_success);
+	    		if (typeof _success === 'function') {
 	    			return _success.call(null, res.response, res.status);
 	    		}
 	    	})
