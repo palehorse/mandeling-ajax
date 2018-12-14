@@ -1,8 +1,8 @@
 var MandelingAJAX = (function(factory) {
 	if (typeof require === 'function') {
-		module.exports = factory();
+		module.exports = factory;
 	} else {
-		return new factory();
+		return factory;
 	}
 })(function() {
 	var _asynchronous = true,
@@ -75,7 +75,7 @@ var MandelingAJAX = (function(factory) {
 	    		});
 	    	})()
 	    	.then(function(res) {
-	    		if (typeof _success === 'function') {
+	    		if (typeof _success === 'function') {console.log(_success);
 	    			return _success.call(null, res.response, res.status);
 	    		}
 	    	})
