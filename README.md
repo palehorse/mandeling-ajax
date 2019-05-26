@@ -3,7 +3,7 @@
 
 ## 安裝
 ```sh
-npm install mandeling
+npm install mandeling-ajax
 ```
 ```html
 <script src="mandeling-ajax/mandeling-ajax.js"></script>
