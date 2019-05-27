@@ -13,6 +13,11 @@ npm install mandeling-ajax
 var ajax = MandelingAJAX();
 var ajax = new MandelingAJAX();
 ```
+### require
+```javascript
+var MandelingAJAX = require('mandeling-ajax/mandeling-ajax.js');
+var ajax = new MandelingAJAX();
+```
 ## 常用方法
 ### get(url, objData)
 ```javascript
