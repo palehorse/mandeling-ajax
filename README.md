@@ -13,10 +13,6 @@ npm install mandeling-ajax
 var ajax = MandelingAJAX();
 var ajax = new MandelingAJAX();
 ```
-### Vue
-```javascript
-var ajax = require('mandeling-ajax/mandeling-ajax.js');
-```
 ## 常用方法
 ### get(url, objData)
 ```javascript
